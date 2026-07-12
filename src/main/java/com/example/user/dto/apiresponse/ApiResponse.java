@@ -1,6 +1,8 @@
-package com.example.demo.dto.response;
+package com.example.user.dto.apiresponse;
 
 import lombok.*;
+
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -12,14 +14,16 @@ public class ApiResponse<T> {
     private String status;
     private int code;
     private T data;
-    private Object meta;
+    private Object messange;
+    private LocalDateTime timestamp;
 
-    public static <T> ApiResponse<T> success(int code,T data, Object meta) {
+    public static <T> ApiResponse<T> success(int code,T data, Object messange) {
         return ApiResponse.<T>builder()
                 .status("SUCCESS")
                 .code(code)
                 .data(data)
-                .meta(meta)
+                .messange(messange)
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 
@@ -28,6 +32,7 @@ public class ApiResponse<T> {
                 .status("SUCCESS")
                 .code(code)
                 .data(data)
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 
@@ -36,7 +41,8 @@ public class ApiResponse<T> {
                 .status("ERROR")
                 .code(code)
                 .data(data)
-                .meta(message)
+                .messange(message)
+                .timestamp(LocalDateTime.now())
                 .build();
     }
 
